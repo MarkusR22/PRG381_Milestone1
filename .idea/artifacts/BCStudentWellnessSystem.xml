@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BCStudentWellnessSystem">
+    <output-path>$PROJECT_DIR$/out/artifacts/BCStudentWellnessSystem</output-path>
+    <root id="archive" name="BCStudentWellnessSystem.war">
+      <element id="directory" name="lib">
+        <element id="archive" name="PRG381_Milestone1.jar">
+          <element id="module-output" name="PRG381_Milestone1" />
+        </element>
+        <element id="library" level="project" name="javax.servlet-api-4.0.1" />
+      </element>
+      <element id="javaee-facet-resources" facet="PRG381_Milestone1/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="PRG381_Milestone1" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
