@@ -2,6 +2,7 @@ package com.bc.controller;
 
 import com.bc.model.Student;
 import com.bc.model.StudentDAO;
+import com.bc.config.DatabaseConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        StudentDAO studentDAO = new StudentDAO();
+        StudentDAO studentDAO = new StudentDAO(DatabaseConfig.getDbUser(), DatabaseConfig.getDbPassword());
 
         if (studentDAO.emailExists(email)){
             //Email already exists
