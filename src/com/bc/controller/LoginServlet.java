@@ -2,6 +2,7 @@ package com.bc.controller;
 
 import com.bc.model.Student;
 import com.bc.model.StudentDAO;
+import com.bc.config.DatabaseConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        StudentDAO studentDAO = new StudentDAO();
+        StudentDAO studentDAO = new StudentDAO(DatabaseConfig.getDbUser(), DatabaseConfig.getDbPassword());
         Student student = studentDAO.validateLogin(email, password);
 
         if (student != null) {

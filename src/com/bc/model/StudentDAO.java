@@ -3,12 +3,23 @@ package com.bc.model;
 import java.sql.*;
 
 public class StudentDAO {
+    
+    private final DBConnection dbConnection;
+    private final String dbUser;
+    private final String dbPassword;
+    
+    // Constructor with database credentials
+    public StudentDAO(String dbUser, String dbPassword) {
+        this.dbConnection = new DBConnection();
+        this.dbUser = dbUser;
+        this.dbPassword = dbPassword;
+    }
 
     //Register new student
     public boolean registerStudent(Student student) {
         String sql = "INSERT INTO students (student_number, name, surname, email, phone, password) VALUES (?,?,?,?,?,?)";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, student.getStudentNumber());
@@ -29,7 +40,7 @@ public class StudentDAO {
     //Validate login
     public Student validateLogin(String email, String password) {
         String sql = "SELECT * FROM students WHERE email = ? AND password = ?";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, password);
@@ -55,7 +66,7 @@ public class StudentDAO {
     //Check for duplicate email
     public boolean emailExists(String email) {
         String sql = "SELECT * FROM students WHERE email = ?";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);
