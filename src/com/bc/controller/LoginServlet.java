@@ -3,6 +3,7 @@ package com.bc.controller;
 import com.bc.model.Student;
 import com.bc.model.StudentDAO;
 import com.bc.config.DatabaseConfig;
+import com.bc.util.PasswordUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +20,11 @@ public class LoginServlet extends HttpServlet {
 
         //Getting paramaters from the login.jsp
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String plainPassword = request.getParameter("password");
+        String hashedPassword = PasswordUtil.hashPassword(plainPassword);
 
         StudentDAO studentDAO = new StudentDAO(DatabaseConfig.getDbUser(), DatabaseConfig.getDbPassword());
-        Student student = studentDAO.validateLogin(email, password);
+        Student student = studentDAO.validateLogin(email, hashedPassword);
 
         if (student != null) {
             //Create session for successful login
