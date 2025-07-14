@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Dashboard</title>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
