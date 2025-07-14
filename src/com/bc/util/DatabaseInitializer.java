@@ -41,16 +41,17 @@ public class DatabaseInitializer {
 
     private boolean createStudentsTable() {
         String createTableSQL = "CREATE TABLE IF NOT EXISTS students (" +
-            "student_number VARCHAR(20) PRIMARY KEY NOT NULL, " +
-            "name VARCHAR(100) NOT NULL, " +
-            "surname VARCHAR(100) NOT NULL, " +
-            "email VARCHAR(255) UNIQUE NOT NULL, " +
-            "phone VARCHAR(20) NOT NULL, " +
-            "password VARCHAR(255) NOT NULL, " +
-            ")";
-        
+                "student_number VARCHAR(20) PRIMARY KEY NOT NULL, " +
+                "name VARCHAR(100) NOT NULL, " +
+                "surname VARCHAR(100) NOT NULL, " +
+                "email VARCHAR(255) UNIQUE NOT NULL, " +
+                "phone VARCHAR(20) NOT NULL, " +
+                "password VARCHAR(255) NOT NULL" +
+                ")";
 
-        
+
+
+
         try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              Statement stmt = conn.createStatement()) {
             
@@ -75,9 +76,62 @@ public class DatabaseInitializer {
     }
 
 
+    public boolean tableExists() {
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword)) {
+            java.sql.DatabaseMetaData meta = conn.getMetaData();
+            java.sql.ResultSet resultSet = meta.getTables(null, null, "students", new String[]{"TABLE"});
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.err.println("Error checking if table exists: " + e.getMessage());
+            return false;
+        }
+    }
+    
 
+    public boolean testConnection() {
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
+             Statement stmt = conn.createStatement()) {
+            
+            // Test query
+            java.sql.ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM students");
+            if (rs.next()) {
+                System.out.println("✓ Connection test successful. Students table contains " + rs.getInt(1) + " records.");
+                return true;
+            }
+            return false;
+            
+        } catch (SQLException e) {
+            System.err.println("Connection test failed: " + e.getMessage());
+            return false;
+        }
+    }
+    
 
+    public static void main(String[] args) {
 
-
+        String dbUser = "postgres";      // Change to your PostgreSQL username
+        String dbPassword = "password";  // Change to your PostgreSQL password
+        
+        System.out.println("=== Database Initialization ===");
+        System.out.println("Using credentials: " + dbUser + " / [password hidden]");
+        
+        DatabaseInitializer initializer = new DatabaseInitializer(dbUser, dbPassword);
+        
+        System.out.println("\nStarting database initialization...");
+        
+        if (initializer.initializeDatabase()) {
+            System.out.println("✓ Database initialization completed successfully!");
+            
+            // Test the connection and table
+            if (initializer.testConnection()) {
+                System.out.println("✓ Students table is ready for use");
+                System.out.println("\n=== Setup Complete ===");
+                System.out.println("Your database is now ready for the Student Wellness Management System!");
+            }
+        } else {
+            System.err.println("✗ Database initialization failed!");
+            System.err.println("Please check your PostgreSQL server and credentials.");
+        }
+    }
 
 }
