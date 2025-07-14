@@ -44,6 +44,22 @@ public class DatabaseInitializer {
             return false;
         }
     }
+<<<<<<< HEAD
+=======
+    
+
+    private boolean createStudentsTable() {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS public.students (" +
+                "student_number VARCHAR(20) PRIMARY KEY NOT NULL, " +
+                "name VARCHAR(100) NOT NULL, " +
+                "surname VARCHAR(100) NOT NULL, " +
+                "email VARCHAR(255) UNIQUE NOT NULL, " +
+                "phone VARCHAR(20) NOT NULL, " +
+                "password VARCHAR(255) NOT NULL" +
+                ")";
+
+
+>>>>>>> 6602376fe33ff43dfb660cd9b985e0df1747f0eb
 
 
     private boolean createSchemaAndTable() {
