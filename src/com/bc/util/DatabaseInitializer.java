@@ -40,7 +40,7 @@ public class DatabaseInitializer {
     
 
     private boolean createStudentsTable() {
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS students (" +
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS public.students (" +
                 "student_number VARCHAR(20) PRIMARY KEY NOT NULL, " +
                 "name VARCHAR(100) NOT NULL, " +
                 "surname VARCHAR(100) NOT NULL, " +
