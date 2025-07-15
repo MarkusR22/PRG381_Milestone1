@@ -20,7 +20,7 @@
     <content url="jar://$USER_HOME$/Downloads/postgresql-42.7.7.jar!/" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="javax.servlet-api-4.0.1" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="javax.servlet-api-4.0.1" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>

@@ -20,6 +20,13 @@
 
 <main>
 	<section class="dashboard">
+		<%
+			if (session == null || session.getAttribute("studentName") == null) {
+				response.sendRedirect("login.jsp");
+				return;
+			}
+		%>
+
 		<h1>Welcome, ${studentName}!</h1>
 		<p>This is your dashboard.</p>
 		<p>You can view your appointments, counselor details, and student feedback here.</p>

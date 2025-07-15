@@ -17,7 +17,7 @@ public class StudentDAO {
 
     //Register new student
     public boolean registerStudent(Student student) {
-        String sql = "INSERT INTO students (student_number, name, surname, email, phone, password) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO WellnessManagement.students (student_number, name, surname, email, phone, password) VALUES (?,?,?,?,?,?)";
 
         try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -32,14 +32,14 @@ public class StudentDAO {
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
-            e.getErrorCode();
+            e.printStackTrace();
             return false;
         }
     }
 
     //Validate login
     public Student validateLogin(String email, String password) {
-        String sql = "SELECT * FROM students WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM WellnessManagement.students WHERE email = ? AND password = ?";
         try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
@@ -65,7 +65,7 @@ public class StudentDAO {
 
     //Check for duplicate email
     public boolean emailExists(String email) {
-        String sql = "SELECT * FROM students WHERE email = ?";
+        String sql = "SELECT * FROM WellnessManagement.students WHERE email = ?";
         try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
