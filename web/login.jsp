@@ -21,6 +21,12 @@
 <main>
 	<section class="form-container">
 		<h1>Login</h1>
+
+		<% String error = (String) request.getAttribute("errorMessage"); %>
+		<% if (error != null) { %>
+		<p style="color:red;"><%= error %></p>
+		<% } %>
+
 		<form action="${pageContext.request.contextPath}/login" method="post">
 			<label for="email">Email:</label>
 			<input type="email" id="email" name="email">
@@ -31,7 +37,6 @@
 			<button type="submit">Login</button>
 		</form>
 		<p>Don't have an account? <a href="register.jsp">Register</a></p>
-		<p style="color: red">${error}</p>
 	</section>
 </main>
 

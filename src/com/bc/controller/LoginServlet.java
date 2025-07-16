@@ -23,6 +23,13 @@ public class LoginServlet extends HttpServlet {
         String plainPassword = request.getParameter("password");
         String hashedPassword = PasswordUtil.hashPassword(plainPassword);
 
+        if (email == null || hashedPassword == null ||
+                email.isEmpty() || hashedPassword.isEmpty()) {
+            request.setAttribute("errorMessage", "Please fill in all the fields.");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
         StudentDAO studentDAO = new StudentDAO(DatabaseConfig.getDbUser(), DatabaseConfig.getDbPassword());
         Student student = studentDAO.validateLogin(email, hashedPassword);
 

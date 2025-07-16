@@ -77,4 +77,19 @@ public class StudentDAO {
             return false;
         }
     }
+
+    //Check for duplicate student number
+    public boolean studentNumberExists(String studentNumber) {
+        String sql = "SELECT * FROM WellnessManagement.students WHERE student_number = ?";
+        try (Connection conn = dbConnection.getConnection(dbUser, dbPassword);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, studentNumber);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
