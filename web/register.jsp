@@ -11,8 +11,7 @@
 		<div class="logo">BC Wellness</div>
 		<nav>
 			<ul>
-				<li><a href="login.jsp">Login</a></li>
-				<li><a href="register.jsp">Register</a></li>
+				<li><a href="index.jsp">Back</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -57,7 +56,6 @@
 	<ul>
 		<li><a href="https://github.com/MarkusR22/PRG381_Milestone1">Milestone 1 link</a></li>
 		<li><a href="https://github.com/MarkusR22/PRG381_Milestone2">Milestone 2 link</a></li>
-		<li><a href="#">placeholder</a></li>
 	</ul>
 </footer>
 </body>
